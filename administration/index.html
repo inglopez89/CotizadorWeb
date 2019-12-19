@@ -1,0 +1,269 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+	<title>Clientes</title>
+	<script src="javascript/jquery-1.1.3.1.pack.js" type="text/javascript"></script>
+    <script src="javascript/jquery.history_remote.pack.js" type="text/javascript"></script>
+    <script src="javascript/jquery.tabs.pack.js" type="text/javascript"></script>
+	<script src="javascript/calendarmod.js"></script>
+	<script src="javascript/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="estilos/calendar.css" rel="stylesheet" type="text/css">
+	<link href="javascript/SpryValidationTextField.css" rel="stylesheet" type="text/css" /> 
+	<link rel="stylesheet" href="css/jquery.tabs.css" type="text/css" media="print, projection, screen">
+        <!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+        <!--[if lte IE 7]>
+        <link rel="stylesheet" href="jquery.tabs-ie.css" type="text/css" media="projection, screen">
+        <![endif]-->
+      
+	<script type="text/JavaScript">
+<!--
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+//-->
+</script>
+        <style type="text/css" media="screen, projection">
+
+            /* Not required for Tabs, just to make this demo look better... */
+
+            body {
+                font-size: 16px; /* @ EOMB */
+            }
+            * html body {
+                font-size: 100%; /* @ IE */
+            }
+            body * {
+	font-size: 87.5%;
+	font-family: "Trebuchet MS", Trebuchet, Verdana, Helvetica, Arial, sans-serif;
+            }
+            body * * {
+                font-size: 100%;
+            }
+            h1 {
+                margin: 1em 0 1.5em;
+                font-size: 18px;
+            }
+            h2 {
+                margin: 2em 0 1.5em;
+                font-size: 16px;
+            }
+            p {
+                margin: 0;
+            }
+            pre, pre+p, p+p {
+                margin: 1em 0 0;
+            }
+            code {
+                font-family: "Courier New", Courier, monospace;
+            }
+        </style>
+	<style type="text/css">
+	
+	/* START CSS NEEDED ONLY IN DEMO */
+	
+	#mainContainer{
+		width:660px;
+		margin:0 auto;
+		text-align:left;
+		height:100%;
+		
+		border-left:3px double #000;
+		border-right:3px double #000;
+	}
+	#formContent{
+		padding:5px;
+	}
+	/* END CSS ONLY NEEDED IN DEMO */
+	
+	
+	/* Big box with list of options */
+	#ajax_listOfOptions{
+		position:absolute;	/* Never change this one */
+		width:175px;	/* Width of box */
+		height:250px;	/* Height of box */
+		overflow:auto;	/* Scrolling features */
+		border:1px solid #317082;	/* Dark green border */
+		background-color:#FFF;	/* White background color */
+    color: black;
+		text-align:left;
+		font-size:0.9em;
+		z-index:100;
+	}
+	#ajax_listOfOptions div{	/* General rule for both .optionDiv and .optionDivSelected */
+		margin:1px;		
+		padding:1px;
+		cursor:pointer;
+		font-size:0.9em;
+	}
+	#ajax_listOfOptions .optionDiv{	/* Div for each item in list */
+		
+	}
+	#ajax_listOfOptions .optionDivSelected{ /* Selected item in the list */
+		background-color:#317082;
+		color:#FFF;
+	}
+	#ajax_listOfOptions_iframe{
+		background-color:#F00;
+		position:absolute;
+		z-index:5;
+	}
+	
+	form{
+		display:inline;
+	}
+	</style>
+    <link href="css/estilos.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="javascript/ajax.js"></script>
+<script type="text/javascript" src="javascript/ajax-dynamic-list.js"></script>
+<form action="insertar.php" method="post" id="form" name="form" >
+<fieldset>
+<legend>Formato eventos clientes clientes </legend>
+<table border="0" align="center">
+<tr>
+<td width="70"><label for="country">Nombres</label></td>
+<td width="165"><span id="sprytextfield2"><label><input type="text" id="nombre" name="nombre">
+</label><span class="textfieldRequiredMsg">Debe escribir nombre</span>
+<td width="57"><label for="apellido" >Apellidos</label></td>
+<td width="145"><span id="sprytextfield8"><label><input type="text" id="apellido" name="apellido">
+</label><span class="textfieldRequiredMsg">Falta apellido</span></td>
+<td><label for="identificacion">Documento</label></td>
+<td><span id="sprytextfield7"><label><input type="text" id="identificaion" name="identificacion"></label>
+<span class="textfieldRequiredMsg">falta documento.</span><span class="textfieldInvalidFormatMsg">Solo datos numericos</span></span>
+</td>
+<td>Fecha del evento</td>
+<td width="271" valign="middle"><span id="sprytextfield5">
+<label>
+<input name="fecha" type="text" id="fecha" size="12" maxlength="12" />
+<script language="JavaScript">
+new tcal ({
+// form name
+'formname': 'form',
+'Format': '%Y/%m/%d',
+'controlname': 'fecha'
+});
+</script>
+ </label><span class="textfieldRequiredMsg">Falta Fecha</span></td>	
+</tr >
+<td><label for="email">Email</label></td>
+<td><input type="text" id="email" name="email"></td>
+<td><label for="direccion">Direccion</label></td>
+<td><input type="text" id="dir" name="dir"></td>
+<td><label for="tel">Telefono</label></td>
+<td><span id="sprytextfield4"><label><input type="text" id="tel" name="tel">
+<span class="textfieldRequiredMsg">Falta telefono</span><span class="textfieldInvalidFormatMsg">Solo numeros</span></span>
+</td>
+</tr>
+</table>
+<br>
+<table width="921" border="1" bgcolor="#CCCCCC" align="center">
+  <tr>
+    <th scope="col">Origen de contacto </th>
+    </tr>
+</table>
+<br>
+<label>Vitrina</label><input type="checkbox" id="vitrina" name="evento">--<label>Evento</label><input type="checkbox" id="evento" name="evento">--<label>Otros?</label><input type="text" size="100" id="otros" name="otros">
+<br>
+<fieldset>
+<legend>Datos de contacto</legend>
+  <div id="container-5">
+            <ul>
+                <li><a href="#fragment-13"><span>Referencia 1</span></a></li>
+                <li><a href="#fragment-14"><span>Referencia 2</span></a></li>
+            </ul>
+<div id="fragment-13">
+<table width="1144" id="table1">
+<tr>
+<td width="187"><label for="country">Vehiculo de interes:</label></td>
+<td width="241"><input type="text" id="country" name="country" value="" onkeyup="ajax_showOptions(this,'getCountriesByLetters',event)" size="30">
+  <input type="hidden" id="country_hidden" name="country_ID"></td>
+<!-- THE ID OF the country will be inserted into this hidden input -->
+<td width="193"><label>
+<div align="center">Valor:</div>
+</label></td>
+<td width="156"><input type="text" id="valor" name="valor"></td>
+</tr>
+<br>
+<tr>
+<td><label>Cuota Inicial:</label></td>
+<td><input type="text" id="cuotaini" name="cuotaini" size="30"></td>
+<td><label>
+  <div align="center">Saldo:</div>
+</label></td>
+<td><input type="text" id="saldo" name="saldo" size="20"></td>
+<td width="157"><label>Plazo en meses:</label></td>
+<td width="182"><input type="text" id="plazo_meses" name="plazo_meses" size="30"></td>
+</tr>
+<tr>
+<td height="40"><label>Valor cuota mensual (aprox):</label></td>
+<td><input type="text" id="valmesaproxi" name="valmesaproxi" size="30"></td>
+<td><label><div align="center">Valor matricula:</div></label></td>
+<td><input type="text" id="valmatri" name="valmatri" size="20"></td>
+</tr>
+<tr>
+<td><div align="center">Valor seguro(aprox): </div></td>
+<td><input type="text" id="saldo" name="saldo" size="20"></td>
+<td><label><div align="center">Valor SOAT:</div></label></td>
+<td width="156"><input type="text" id="plazo_meses" name="plazo_meses" size="20"></td>
+</tr>
+<tr>
+<td><label>Accesorios:</label></td>
+<td><textarea cols="30" rows="3" id="accesor" name="accesor"></textarea></td>
+</tr>
+<tr>
+<td><label>Retoma: Marca</label></td>
+<td><input type="text" size="30" id="rtm1" name="rtm1"></td>
+<td><div align="center">Version: </div></td>
+<td><input type="text" id="verrtm1" name="verrtm1" size="20"></td>
+<td><label><div align="center">Año:</div></label></td>
+<td width="182"><input type="text" id="añortm1" name="añortm1" size="30"></td>
+</tr>
+<tr>
+<td><label>Placa</label></td>
+<td><input type="text" size="30" id="plartm1" name="plartm1"></td>
+<td><div align="center">KM: </div></td>
+<td><input type="text" id="kmrtm1" name="kmrtm1" size="20"></td>
+<td><label><div align="center">Valor retoma (aprox):</div></label></td>
+<td width="182"><input type="text" id="valrtm1" name="valtm1" size="30"></td>
+</tr>
+</table>
+<table>
+<td><label>Observaciones</label></td>
+<td>&quot;&quot;<textarea cols="50" rows="4" id="obserrtm1" name="obserrtm1"></textarea></td>
+</table>
+
+    </div>
+            <div id="fragment-14">
+			
+            </div>
+  </div>
+</fieldset>
+<script type="text/javascript">
+     $(function() {
+              $('#container-5').tabs({ fxSlide: true, fxFade: true, fxSpeed: 'normal' });
+            });
+			</script>
+<center>
+<button type="submit" >
+<img src="img/guardar.jpg" width="40" height="40">
+</button></center>
+<center><label>Guardar</label></center>
+</fieldset>	
+</form>
+<span id="resultados"></span>
+<script type="text/javascript">
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytextfield2", "custom", {validateOn:["blur"]});
+var sprytextfield7 = new Spry.Widget.ValidationTextField("sprytextfield7", "integer", {validateOn:["blur"]});
+var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytextfield8", "custom", {validateOn:["blur"]});
+var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytextfield4", "integer", {validateOn:["blur"]});
+var sprytextfield5 = new Spry.Widget.ValidationTextField("sprytextfield5", "custom", {validateOn:["blur"]});
+</script>            
+</body>
+</html>

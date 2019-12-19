@@ -1,0 +1,71 @@
+container {
+	background-color: #CCCCCC;
+	
+}
+#header {
+	background-color: #FF854A;
+	height: 50px;
+	width: 400px;
+	margin-left:350px;
+	border: thick groove #FFFFFF;
+}
+#conten {
+	height: auto;
+	width: 400px;
+	margin-left: 350px;
+	border: medium outset #FF6600;
+	border-radius:15px;
+}
+#f1 {
+	height: auto;
+	width: 860px;
+	background-color: #E2E2E2;
+	/*background-image:url(../img/pantalla4final.jpg);*/
+	
+}
+.botonG{
+        font-size:11px;
+        font-family:Verdana,Helvetica;
+        font-weight:bold;
+  		background-color: #CCCCCC;
+		color: #000000;
+        width:120px;
+        height:21px;
+       }
+.botonR{
+        font-size:11px;
+        font-family:Verdana,Helvetica;
+        font-weight:bold;
+  		background-color: #990000;
+		color: #CCCCCC;
+        width:120px;
+        height:21px;
+       }
+.label {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #000000;
+}
+.labelW {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #FFFFFF;
+}
+.cuadro { background-color: #CCCCCC; border: #666666; border-style: solid;
+		 border-top-width: 1px; border-right-width: 1px; border-bottom-width:
+		 1px; border-left-width: 1px
+}
+.tabs {
+    border-top: 1px solid #97a5b0;
+    padding: 1em 8px;
+	volume:medium;
+	/*background-image:url(../img/pantalla3.jpg);*/ /* declare background color for container to avoid distorted fonts in IE while fading */
+	background-color: #990000;
+}
+.det {
+    border-top: 1px solid #97a5b0;
+    padding: 1em 8px;
+	volume:medium;
+	/*background-image:url(../img/pantalla3.jpg);*/ /* declare background color for container to avoid distorted fonts in IE while fading */
+	background-color: #E2E2E2;
+}
